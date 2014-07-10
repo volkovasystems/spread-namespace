@@ -17,7 +17,27 @@
 	@end-module-documentation
 */
 var spreadNamespace = function spreadNamespace( namespace ){
+	/*:
+		@meta-configuration:
+			{
+				"namespace:required": "string"
+			}
+		@end-meta-configuration
+	*/
 
+	if( NAMESPACE_PATTERN.test( namespace ) ){
+		return namespace.replaceAll( NAMESPACE_TERM_PATTERN,
+			function onReplaced( match ){
+
+			} );
+	}else{
+		var error = new Error( "invalid namespace format" );
+		console.error( error );
+		throw error;
+	}
 };
+
+const NAMESPACE_PATTERN = /^(?:[a-zA-Z][a-zA-Z0-9]+[-_ ])*[a-zA-Z][a-zA-Z0-9]+$/;
+const NAMESPACE_TERM_PATTERN = /^([a-zA-Z])|[-_ ]([a-zA-Z])/;
 
 ( module || { } ).exports = spreadNamespace;
