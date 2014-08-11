@@ -1,21 +1,4 @@
 /*:
-	@module-configuration:
-		{
-			"packageName": "spread-namespace",
-			"fileName": "spread-namespace.js",
-			"moduleName": "spreadNamespace",
-			"authorName": "Richeve S. Bebedor",
-			"authorEMail": "richeve.bebedor@gmail.com",
-			"repository": "git@github.com:volkovasystems/spread-namespace.git",
-			"testCase": "spread-namespace-test.js",
-			"isGlobal": true
-		}
-	@end-module-configuration
-
-	@module-documentation:
-
-	@end-module-documentation
-
 	@module-license:
 		The MIT License (MIT)
 
@@ -39,6 +22,23 @@
 		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 		SOFTWARE.
 	@end-module-license
+
+	@module-configuration:
+		{
+			"packageName": "spread-namespace",
+			"fileName": "spread-namespace.js",
+			"moduleName": "spreadNamespace",
+			"authorName": "Richeve S. Bebedor",
+			"authorEMail": "richeve.bebedor@gmail.com",
+			"repository": "git@github.com:volkovasystems/spread-namespace.git",
+			"testCase": "spread-namespace-test.js",
+			"isGlobal": true
+		}
+	@end-module-configuration
+
+	@module-documentation:
+
+	@end-module-documentation
 */
 var spreadNamespace = function spreadNamespace( namespace ){
 	/*:
@@ -50,14 +50,18 @@ var spreadNamespace = function spreadNamespace( namespace ){
 	*/
 
 	if( NAMESPACE_PATTERN.test( namespace ) ){
+		
 		return namespace.replace( NAMESPACE_TERM_PATTERN,
 			function onReplaced( match, divideCharacter ){
-                if( divideCharacter && divideCharacter != " " ){
-                    return match.replace( divideCharacter, " " );
-                }else{
-                    return match;
-                }
+
+				if( divideCharacter && divideCharacter != " " ){
+					return match.replace( divideCharacter, " " );
+
+				}else{
+					return match;
+				}
 			} );
+
 	}else{
 		var error = new Error( "invalid namespace format" );
 		console.error( error );
@@ -68,4 +72,4 @@ var spreadNamespace = function spreadNamespace( namespace ){
 const NAMESPACE_PATTERN = /^(?:[a-zA-Z][a-zA-Z0-9]*[-_ ])*[a-zA-Z][a-zA-Z0-9]*$/;
 const NAMESPACE_TERM_PATTERN = /^[a-zA-Z]|([-_ ])[a-zA-Z]/g;
 
-( module || { } ).exports = spreadNamespace;
+module.exports = spreadNamespace;
